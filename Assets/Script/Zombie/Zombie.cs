@@ -76,7 +76,7 @@ public class Zombie : LivingGO
             else
             {
                 navMesh.isStopped =true;
-                Collider[] cols = Physics.OverlapSphere(transform.position, 20f, whatIsTarget);
+                Collider[] cols = Physics.OverlapSphere(transform.position, 100f, whatIsTarget);
                 foreach(Collider col in cols)
                 {
                     LivingGO livingGo = col.GetComponent<LivingGO>();
@@ -99,9 +99,8 @@ public class Zombie : LivingGO
         hitEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
         hitEffect.Play();
         zombieAudioPlayer.PlayOneShot(hitSound);
-
+        Debug.Log(hitEffect.transform.position);
         base.OnDamage(damage, hitPoint, hitNormal);
-        Debug.Log(health);
     }
 
     public override void OnDie()
