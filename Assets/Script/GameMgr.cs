@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMgr : MonoBehaviour
 { 
@@ -33,5 +34,16 @@ public class GameMgr : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
+
+        StartCoroutine(GameRestart());
+    }
+
+    public IEnumerator GameRestart() //TO-DO : 재시작 버튼 누르면 호출하기
+    {
+        yield return new WaitForSeconds(5f);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        isGameOver = false;
+
     }
 }

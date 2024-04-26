@@ -29,6 +29,9 @@ public class PlayerHealth : LivingGO
     {
         playerMovement.enabled = true;
         playerShooter.enabled = true;
+        Debug.Log(health);
+        Debug.Log(GameMgr.Instance.isGameOver);
+
     }
 
     private void Update()

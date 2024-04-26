@@ -179,10 +179,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.4646292
-  m_Height: 2.9292583
+  m_Radius: 0.49329805
+  m_Height: 1.3479931
   m_Direction: 1
-  m_Center: {x: -0.06967187, y: 1.0497985, z: 0.21412396}
+  m_Center: {x: 0.03703928, y: 0.7054126, z: 0.03338051}
 --- !u!82 &114328958531834325
 AudioSource:
   m_ObjectHideFlags: 0
