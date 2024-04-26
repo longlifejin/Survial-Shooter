@@ -6,7 +6,7 @@ public class Gun : MonoBehaviour
     public Transform fireTransform; //ÃÑ¾Ë ¹ß»ç À§Ä¡
 
     public ParticleSystem fireEffect;
-    public LineRenderer bulletLineRenderer;
+    private LineRenderer bulletLineRenderer;
 
     private AudioSource gunAudioPlayer; //ÃÑ »ç¿îµå
     public AudioClip shotClip;

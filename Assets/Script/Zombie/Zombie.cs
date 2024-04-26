@@ -22,7 +22,6 @@ public class Zombie : LivingGO
     public AudioClip deathSound;
 
     public ParticleSystem hitEffect;
-    private Rigidbody rigidBody;
 
     private float attackInterval = 1f;
     private float lastAttackTime;
@@ -45,7 +44,7 @@ public class Zombie : LivingGO
         navMesh = GetComponent<NavMeshAgent>();
         zombieRenderer = GetComponent<Renderer>();
         zombieAudioPlayer = GetComponent<AudioSource>();
-        rigidBody = GetComponent<Rigidbody>();
+        navMesh.enabled = true;
     }
 
     private void Start()
@@ -119,19 +118,14 @@ public class Zombie : LivingGO
         navMesh.enabled = false;
 
         zombieAnimator.SetTrigger("Death");
-       
         zombieAudioPlayer.PlayOneShot(deathSound);
     }
 
     public void StartSinking()
     {
-        if (!rigidBody.isKinematic)
-            return;
+        navMesh.enabled = false;
 
-        rigidBody.isKinematic = false;
-        rigidBody.useGravity = true;
-
-        float sinkSpeed = 0.1f;
+        float sinkSpeed = 1f;
         float sinkDepth = -5f;
         transform.position += Vector3.down * sinkSpeed * Time.deltaTime;
 
