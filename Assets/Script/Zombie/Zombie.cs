@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -21,6 +22,7 @@ public class Zombie : LivingGO
     public AudioClip deathSound;
 
     public ParticleSystem hitEffect;
+    private Rigidbody rigidBody;
 
     private float attackInterval = 1f;
     private float lastAttackTime;
@@ -43,6 +45,7 @@ public class Zombie : LivingGO
         navMesh = GetComponent<NavMeshAgent>();
         zombieRenderer = GetComponent<Renderer>();
         zombieAudioPlayer = GetComponent<AudioSource>();
+        rigidBody = GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -54,6 +57,12 @@ public class Zombie : LivingGO
     private void Update()
     {
         zombieAnimator.SetBool("HasTarget", hasTarget);
+
+        AnimatorStateInfo stateInfo = zombieAnimator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("Death") && stateInfo.normalizedTime >= 0.99f)
+        {
+            StartSinking();
+        }
     }
 
     private IEnumerator UpdatePath()
@@ -110,19 +119,26 @@ public class Zombie : LivingGO
         navMesh.enabled = false;
 
         zombieAnimator.SetTrigger("Death");
-        StartSinking();
+       
         zombieAudioPlayer.PlayOneShot(deathSound);
     }
 
     public void StartSinking()
     {
-        float sinkSpeed = 0.5f;
+        if (!rigidBody.isKinematic)
+            return;
+
+        rigidBody.isKinematic = false;
+        rigidBody.useGravity = true;
+
+        float sinkSpeed = 0.1f;
         float sinkDepth = -5f;
         transform.position += Vector3.down * sinkSpeed * Time.deltaTime;
 
         if(transform.position.y <= sinkDepth)
         {
             Destroy(gameObject);
+            //TO-DO : 오브젝트 풀링 적용하기
         }
     }
 
