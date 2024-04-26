@@ -8,6 +8,8 @@ public class GameMgr : MonoBehaviour
     public static GameMgr Instance {  get; private set; }
     public bool isGameOver {  get; private set; }
 
+    public ObjectPool objectPool;
+
     private void Awake()
     {
         if(Instance == null)
@@ -23,6 +25,10 @@ public class GameMgr : MonoBehaviour
         isGameOver = false;
     }
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -34,16 +40,19 @@ public class GameMgr : MonoBehaviour
     public void GameOver()
     {
         isGameOver = true;
-
+        StopAllCoroutines();
+        objectPool.ClearQueue();
         StartCoroutine(GameRestart());
+
     }
 
-    public IEnumerator GameRestart() //TO-DO : 재시작 버튼 누르면 호출하기
+    public IEnumerator GameRestart()
     {
         yield return new WaitForSeconds(5f);
-
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         isGameOver = false;
 
     }
+
 }

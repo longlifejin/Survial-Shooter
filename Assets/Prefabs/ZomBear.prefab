@@ -123,6 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 150
+  typeNumber: 1
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 8

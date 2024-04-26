@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Pool;
 
 public class Zombie : LivingGO
 {
+    public int typeNumber;
+
     public LayerMask whatIsTarget;
     private LivingGO targetGo;
     private NavMeshAgent navMesh;
@@ -22,6 +25,7 @@ public class Zombie : LivingGO
     public AudioClip deathSound;
 
     public ParticleSystem hitEffect;
+    private ObjectPool objectPool;
 
     private float attackInterval = 1f;
     private float lastAttackTime;
@@ -45,12 +49,16 @@ public class Zombie : LivingGO
         zombieRenderer = GetComponent<Renderer>();
         zombieAudioPlayer = GetComponent<AudioSource>();
         navMesh.enabled = true;
+
+
     }
 
     private void Start()
     {
         StartCoroutine(UpdatePath());
         base.speed = speed;
+        navMesh.enabled = true;
+        objectPool = GameMgr.Instance.objectPool;
     }
 
     private void Update()
@@ -129,8 +137,9 @@ public class Zombie : LivingGO
 
         if(transform.position.y <= sinkDepth)
         {
-            Destroy(gameObject);
+            // Destroy(gameObject);
             //TO-DO : 오브젝트 풀링 적용하기
+            objectPool.ReturnToPool(this.gameObject, this.typeNumber);
         }
     }
 
