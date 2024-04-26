@@ -99,7 +99,6 @@ public class Zombie : LivingGO
         hitEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
         hitEffect.Play();
         zombieAudioPlayer.PlayOneShot(hitSound);
-        Debug.Log(hitEffect.transform.position);
         base.OnDamage(damage, hitPoint, hitNormal);
     }
 

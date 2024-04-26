@@ -132,7 +132,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   damage: 10
-  probability: 6
+  probability: 5
   speed: 20
   zombiePrefab: {fileID: 1240216595513993605}
   zombieRenderer: {fileID: 0}

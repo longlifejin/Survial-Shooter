@@ -23,7 +23,6 @@ public class PlayerHealth : LivingGO
         playerMovement = GetComponent<PlayerMovement>();
         playerShooter = GetComponent<PlayerShooter>();
         UpdateHealth(startHealth, false);
-        Debug.Log(health);
     }
 
     private void OnEnable()
@@ -41,8 +40,6 @@ public class PlayerHealth : LivingGO
     {
         if (dead)
             return;
-        Debug.Log("Damage : " + damage);
-        Debug.Log("health : " + health);
         base.OnDamage(damage, hitPoint, hitNormal);
         playerAudioPlayer.PlayOneShot(hitClip);
     }
@@ -52,18 +49,22 @@ public class PlayerHealth : LivingGO
         base.OnDie();
         playerAudioPlayer.PlayOneShot(deathClip);
         playerAnimator.SetTrigger("Death");
+        GameMgr.Instance.GameOver();
 
         playerMovement.enabled = false;
         playerShooter.enabled = false;
 
     }
 
-    public void Respawn()
+
+
+    public void RestartLevel()
     {
         if(onRespawn != null)
         {
             onRespawn();
         }
+        Debug.Log("Restart");
     }
 
 }

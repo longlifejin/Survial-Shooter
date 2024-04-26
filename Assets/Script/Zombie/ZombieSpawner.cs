@@ -21,11 +21,14 @@ public class ZombieSpawner : MonoBehaviour
     }
     private void Update()
     {
-        if (Time.time >= spawnTime + lastSpawnTime)
+        if(!GameMgr.Instance.isGameOver)
         {
-            lastSpawnTime = Time.time;
-            spawnTime = Random.Range(0, 1f);
-            CreateZombie(PickZombie());
+            if (Time.time >= spawnTime + lastSpawnTime)
+            {
+                lastSpawnTime = Time.time;
+                spawnTime = Random.Range(0.5f, 2f);
+                CreateZombie(PickZombie());
+            }
         }
     }
 
