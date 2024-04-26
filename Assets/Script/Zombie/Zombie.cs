@@ -9,15 +9,18 @@ public class Zombie : LivingGO
     private LivingGO targetGo;
     private NavMeshAgent navMesh;
 
-    public float damage = 5f;
-
-    public ParticleSystem hitEffect;
-    public AudioClip hitSound;
-    public AudioClip deathSound;
+    public float damage;
+    public float probability;
+    public float speed;
+    public GameObject zombiePrefab;
 
     private Animator zombieAnimator;
     private AudioSource zombieAudioPlayer;
     public Renderer zombieRenderer;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
+
+    public ParticleSystem hitEffect;
 
     private float attackInterval = 1f;
     private float lastAttackTime;
@@ -45,6 +48,7 @@ public class Zombie : LivingGO
     private void Start()
     {
         StartCoroutine(UpdatePath());
+        base.speed = speed;
     }
 
     private void Update()
@@ -89,6 +93,7 @@ public class Zombie : LivingGO
         zombieAudioPlayer.PlayOneShot(hitSound);
 
         base.OnDamage(damage, hitPoint, hitNormal);
+        Debug.Log(health);
     }
 
     public override void OnDie()
@@ -104,8 +109,21 @@ public class Zombie : LivingGO
         navMesh.isStopped = true;
         navMesh.enabled = false;
 
-        zombieAnimator.SetTrigger("Die");
+        zombieAnimator.SetTrigger("Death");
+        StartSinking();
         zombieAudioPlayer.PlayOneShot(deathSound);
+    }
+
+    public void StartSinking()
+    {
+        float sinkSpeed = 0.5f;
+        float sinkDepth = -5f;
+        transform.position += Vector3.down * sinkSpeed * Time.deltaTime;
+
+        if(transform.position.y <= sinkDepth)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerStay(Collider other)

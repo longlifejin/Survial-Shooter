@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766e30c80ab51b94c8c4f891de829eed, type: 3}
   m_Name: Bear
   m_EditorClassIdentifier: 
-  zombieObj: {fileID: 0}
+  zombieObj: {fileID: 100002, guid: b77f122f451a2394898a24191c26107c, type: 3}
   health: 150
   damage: 15
   speed: 2
+  hitSound: {fileID: 8300000, guid: 1d4840678e677424b8921716c72397ea, type: 3}
+  deathSound: {fileID: 8300000, guid: 62366b8d2c37a49dca550841c741317f, type: 3}
   probability: 3

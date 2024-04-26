@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766e30c80ab51b94c8c4f891de829eed, type: 3}
   m_Name: Bunny
   m_EditorClassIdentifier: 
-  zombieObj: {fileID: 0}
+  zombieObj: {fileID: 100074, guid: be66986effd141b4992d2d78be127139, type: 3}
   health: 100
   damage: 10
   speed: 3
+  hitSound: {fileID: 8300000, guid: 02e6208ec76314158a9f548f51fe9f11, type: 3}
+  deathSound: {fileID: 8300000, guid: 1d3bfb9269f136947bf8ac164cace1ff, type: 3}
   probability: 5

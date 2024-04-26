@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766e30c80ab51b94c8c4f891de829eed, type: 3}
   m_Name: Elephant
   m_EditorClassIdentifier: 
-  zombieObj: {fileID: 0}
+  zombieObj: {fileID: 100002, guid: b77f122f451a2394898a24191c26107c, type: 3}
   health: 200
   damage: 20
   speed: 1
+  hitSound: {fileID: 8300000, guid: fce027b40770a44298a6f5a4233bfb04, type: 3}
+  deathSound: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
   probability: 2

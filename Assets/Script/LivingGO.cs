@@ -7,6 +7,7 @@ public class LivingGO : MonoBehaviour, IDamageable
 {
     public float startHealth = 100f;
     public float health {  get; private set; } 
+    public float speed { get; set; }
     public bool dead { get; private set; }
     public event Action onDeath;
 
