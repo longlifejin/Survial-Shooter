@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HitParticles
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: ef39ae7291c751249b296f00bf6fb042, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ef39ae7291c751249b296f00bf6fb042, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.30444172
@@ -75,9 +79,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100002, guid: b77f122f451a2394898a24191c26107c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: b77f122f451a2394898a24191c26107c, type: 3}
       propertyPath: m_Name
       value: Hellephant
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: b77f122f451a2394898a24191c26107c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100040, guid: b77f122f451a2394898a24191c26107c, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: b77f122f451a2394898a24191c26107c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -186,17 +202,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startHealth: 200
+  typeNumber: 0
   whatIsTarget:
     serializedVersion: 2
     m_Bits: 8
   damage: 20
   probability: 1
   speed: 1
-  zombiePrefab: {fileID: 2639741632613885077}
+  score: 50
   zombieRenderer: {fileID: 0}
   hitSound: {fileID: 8300000, guid: fce027b40770a44298a6f5a4233bfb04, type: 3}
   deathSound: {fileID: 8300000, guid: 8c615fd0429f34edf85539d70279360d, type: 3}
   hitEffect: {fileID: 546308376859760932}
+  objectPool: {fileID: 0}
 --- !u!65 &5676025433397966773
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -6,23 +6,23 @@ using UnityEngine.SceneManagement;
 public class GameMgr : MonoBehaviour
 { 
     public static GameMgr Instance {  get; private set; }
-    public bool isGameOver {  get; private set; }
-
+    public bool isGameOver { get; private set; }
     public ObjectPool objectPool;
+    public int score;
 
     private void Awake()
     {
         if(Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+           // Destroy(gameObject);
         }
-
         isGameOver = false;
+
     }
 
     private void Start()
@@ -39,9 +39,9 @@ public class GameMgr : MonoBehaviour
 
     public void GameOver()
     {
+        Debug.Log("Game Over");
         isGameOver = true;
         StopAllCoroutines();
-        objectPool.ClearQueue();
         StartCoroutine(GameRestart());
 
     }
@@ -49,10 +49,20 @@ public class GameMgr : MonoBehaviour
     public IEnumerator GameRestart()
     {
         yield return new WaitForSeconds(5f);
-        
+
+        score = 0;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        objectPool.ResetQueue();
         isGameOver = false;
 
+    }
+
+    public void AddScore(int addScore)
+    {
+        if(!isGameOver)
+        {
+            score += addScore;
+        }
     }
 
 }

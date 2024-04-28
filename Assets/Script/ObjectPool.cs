@@ -13,24 +13,23 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
-        ClearQueue();
-
+       
     }
 
     private void Start()
     {
-        
-
-        AddPrefabs(zombiePrefabs[0], ElephantPool, count);
-        AddPrefabs(zombiePrefabs[1], bearPool, count);
-        AddPrefabs(zombiePrefabs[2], bunnyPool, count);
+        ResetQueue();
     }
 
-    public void ClearQueue()
+    public void ResetQueue()
     {
+        Debug.Log("ResetQueue");
         ElephantPool.Clear();
         bearPool.Clear();
         bunnyPool.Clear();
+        AddPrefabs(zombiePrefabs[0], ElephantPool, count);
+        AddPrefabs(zombiePrefabs[1], bearPool, count);
+        AddPrefabs(zombiePrefabs[2], bunnyPool, count);
     }
 
     private void AddPrefabs(GameObject prefab, Queue<GameObject> queue, int count)
@@ -61,9 +60,16 @@ public class ObjectPool : MonoBehaviour
 
     public GameObject GetFromQueue(Queue<GameObject> queue, GameObject prefab)
     {
-        if(queue.Count == 0)
+        if(queue.Count <= 1)
         {
+            Debug.Log("AddPrefabs / getFromQueue");
             AddPrefabs(prefab, queue, count);
+            Debug.Log(count);
+        }
+
+        if(queue.Dequeue() == null)
+        {
+            Debug.Log("GetFromQueue null");
         }
         return queue.Dequeue();
     }

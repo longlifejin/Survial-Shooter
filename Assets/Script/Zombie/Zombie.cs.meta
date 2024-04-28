@@ -3,7 +3,13 @@ guid: 091402a5a1a24d64bacb35adf8dd9008
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - zombiePrefab: {instanceID: 0}
+  - zombieRenderer: {instanceID: 0}
+  - hitSound: {instanceID: 0}
+  - deathSound: {instanceID: 0}
+  - hitEffect: {instanceID: 0}
+  - objectPool: {fileID: 505970658928591866, guid: e6b0f22b9f384ba4cafb00f7a9e068c6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Pool;
 
 public class ZombieSpawner : MonoBehaviour
 {
     //public GameObject[] zombiePrefabs;
     public Transform[] spawnPoints;
 
-    private ObjectPool objectPool;
+    //private ObjectPool objectPool;
 
     private int zombieCount; //나중에 UI에 추가할 것
     List<Zombie> zombies;
@@ -23,9 +21,9 @@ public class ZombieSpawner : MonoBehaviour
     private void Start()
     {
         zombies.Clear();
-        spawnTime = Random.Range(0, 1f);
+        spawnTime = Random.Range(0, 0.1f);
         lastSpawnTime = 0;
-        objectPool = GameMgr.Instance.objectPool;
+        //objectPool = GameMgr.Instance.objectPool;
 
     }
     private void Update()
@@ -47,19 +45,22 @@ public class ZombieSpawner : MonoBehaviour
         float accumulation = 0f;
         int typeNumber = 0;
 
-        for (int i = 0; i < objectPool.zombiePrefabs.Length; ++i)
+        for (int i = 0; i < GameMgr.Instance.objectPool.zombiePrefabs.Length; ++i)
         {
-            Debug.Log(objectPool.zombiePrefabs[i]);
-            float prob = objectPool.zombiePrefabs[i].GetComponent<Zombie>().probability;
+            float prob = GameMgr.Instance.objectPool.zombiePrefabs[i].GetComponent<Zombie>().probability;
             accumulation += prob;
             if (rand < accumulation)
             {
                 typeNumber = i;
-                Debug.Log(i);
                 break;
             }
         }
-        return objectPool.GetFromPool(typeNumber);
+        Debug.Log(typeNumber);
+        if (GameMgr.Instance.objectPool.GetFromPool(typeNumber) == null)
+        {
+            Debug.Log("Pool is null");
+        }
+        return GameMgr.Instance.objectPool.GetFromPool(typeNumber);
     }
 
     private void CreateZombie(GameObject zombiePrefab)
@@ -72,14 +73,9 @@ public class ZombieSpawner : MonoBehaviour
         {
             zombies.Remove(enemy);
             zombieCount = zombies.Count;
-
-            //TO-DO : 점수 추가 부분 넣기
-
+            GameMgr.Instance.AddScore(enemy.score);
         };
         zombies.Add(enemy);
         zombieCount = zombies.Count;
-        Debug.Log("CreateZombie");
     }
-
-
 }

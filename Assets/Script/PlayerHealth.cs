@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : LivingGO
 {
     public AudioClip deathClip;
     public AudioClip hitClip;
 
+    public Slider healthBar;
+    public Image panel;
+    
     private AudioSource playerAudioPlayer;
     private Animator playerAnimator;
 
@@ -29,8 +33,9 @@ public class PlayerHealth : LivingGO
     {
         playerMovement.enabled = true;
         playerShooter.enabled = true;
-        Debug.Log(health);
-        Debug.Log(GameMgr.Instance.isGameOver);
+        healthBar.value = health / startHealth;
+        panel.enabled = false;
+
 
     }
 
@@ -45,6 +50,15 @@ public class PlayerHealth : LivingGO
             return;
         base.OnDamage(damage, hitPoint, hitNormal);
         playerAudioPlayer.PlayOneShot(hitClip);
+        healthBar.value = health / startHealth;
+        StartCoroutine(PlayDamageEffect());
+    }
+
+    public IEnumerator PlayDamageEffect()
+    {
+        panel.enabled = true;
+        yield return new WaitForSeconds(0.1f);
+        panel.enabled = false;
     }
 
     public override void OnDie()

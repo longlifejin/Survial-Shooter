@@ -16,7 +16,9 @@ public class Zombie : LivingGO
     public float damage;
     public float probability;
     public float speed;
-    public GameObject zombiePrefab;
+    //public GameObject zombiePrefab;
+
+    public int score;
 
     private Animator zombieAnimator;
     private AudioSource zombieAudioPlayer;
@@ -25,7 +27,7 @@ public class Zombie : LivingGO
     public AudioClip deathSound;
 
     public ParticleSystem hitEffect;
-    private ObjectPool objectPool;
+    public ObjectPool objectPool;
 
     private float attackInterval = 1f;
     private float lastAttackTime;
@@ -49,7 +51,7 @@ public class Zombie : LivingGO
         zombieRenderer = GetComponent<Renderer>();
         zombieAudioPlayer = GetComponent<AudioSource>();
         navMesh.enabled = true;
-
+       
 
     }
 
@@ -58,7 +60,7 @@ public class Zombie : LivingGO
         StartCoroutine(UpdatePath());
         base.speed = speed;
         navMesh.enabled = true;
-        objectPool = GameMgr.Instance.objectPool;
+        //objectPool = GameMgr.Instance.objectPool;
     }
 
     private void Update()
@@ -125,6 +127,8 @@ public class Zombie : LivingGO
 
         zombieAnimator.SetTrigger("Death");
         zombieAudioPlayer.PlayOneShot(deathSound);
+
+
     }
 
     public void StartSinking()
@@ -139,7 +143,7 @@ public class Zombie : LivingGO
         {
             // Destroy(gameObject);
             //TO-DO : 오브젝트 풀링 적용하기
-            objectPool.ReturnToPool(this.gameObject, this.typeNumber);
+            GameMgr.Instance.objectPool.ReturnToPool(this.gameObject, this.typeNumber);
         }
     }
 
