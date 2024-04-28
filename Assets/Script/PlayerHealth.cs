@@ -35,8 +35,6 @@ public class PlayerHealth : LivingGO
         playerShooter.enabled = true;
         healthBar.value = health / startHealth;
         panel.enabled = false;
-
-
     }
 
     private void Update()

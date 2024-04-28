@@ -9,6 +9,7 @@ public class GameMgr : MonoBehaviour
     public bool isGameOver { get; private set; }
     public ObjectPool objectPool;
     public int score;
+    public AudioSource bgmAudio;
 
     private void Awake()
     {
@@ -19,14 +20,14 @@ public class GameMgr : MonoBehaviour
         }
         else
         {
-           // Destroy(gameObject);
+           //Destroy(gameObject);
         }
         isGameOver = false;
-
     }
 
     private void Start()
     {
+        bgmAudio.Play();
     }
 
     private void Update()
@@ -54,6 +55,7 @@ public class GameMgr : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         objectPool.ResetQueue();
         isGameOver = false;
+        bgmAudio.Play();
 
     }
 

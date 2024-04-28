@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class ZombieSpawner : MonoBehaviour
 {
-    //public GameObject[] zombiePrefabs;
     public Transform[] spawnPoints;
-
-    //private ObjectPool objectPool;
 
     private int zombieCount; //나중에 UI에 추가할 것
     List<Zombie> zombies;
@@ -23,7 +20,6 @@ public class ZombieSpawner : MonoBehaviour
         zombies.Clear();
         spawnTime = Random.Range(0, 0.1f);
         lastSpawnTime = 0;
-        //objectPool = GameMgr.Instance.objectPool;
 
     }
     private void Update()
@@ -55,7 +51,6 @@ public class ZombieSpawner : MonoBehaviour
                 break;
             }
         }
-        Debug.Log(typeNumber);
         if (GameMgr.Instance.objectPool.GetFromPool(typeNumber) == null)
         {
             Debug.Log("Pool is null");

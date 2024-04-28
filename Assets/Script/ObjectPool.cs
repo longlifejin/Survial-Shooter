@@ -23,7 +23,6 @@ public class ObjectPool : MonoBehaviour
 
     public void ResetQueue()
     {
-        Debug.Log("ResetQueue");
         ElephantPool.Clear();
         bearPool.Clear();
         bunnyPool.Clear();
@@ -62,9 +61,7 @@ public class ObjectPool : MonoBehaviour
     {
         if(queue.Count <= 1)
         {
-            Debug.Log("AddPrefabs / getFromQueue");
             AddPrefabs(prefab, queue, count);
-            Debug.Log(count);
         }
 
         if(queue.Dequeue() == null)
