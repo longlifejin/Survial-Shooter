@@ -2,27 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviour
-{ 
-    public static GameMgr Instance {  get; private set; }
+{
+    public static GameMgr Instance { get; private set; }
     public bool isGameOver { get; private set; }
     public ObjectPool objectPool;
     public int score;
     public AudioSource bgmAudio;
+    public GameObject pauseMenu;
+    public Button quitGameButton;
+    public Button resumeButton;
+
+    public bool isPause;
 
     private void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
         {
             Instance = this;
             //DontDestroyOnLoad(gameObject);
         }
         else
         {
-           //Destroy(gameObject);
+            //Destroy(gameObject);
         }
         isGameOver = false;
+        isPause = false;
+        pauseMenu.SetActive(false);
+        quitGameButton.enabled = false;
+        resumeButton.enabled = false;
     }
 
     private void Start()
@@ -32,10 +42,28 @@ public class GameMgr : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //일시정지
+            Pause();
         }
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        pauseMenu.SetActive(true);
+        quitGameButton.enabled = true;
+        resumeButton.enabled = true;
+        isPause = true;
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+        pauseMenu.SetActive(false);
+        quitGameButton.enabled = false;
+        resumeButton.enabled = false;
+        isPause = false;
     }
 
     public void GameOver()
@@ -61,7 +89,7 @@ public class GameMgr : MonoBehaviour
 
     public void AddScore(int addScore)
     {
-        if(!isGameOver)
+        if (!isGameOver)
         {
             score += addScore;
         }

@@ -14,7 +14,7 @@ public class PlayerShooter : MonoBehaviour
 
     private void Update()
     {
-        if(playerInput.fire)
+        if(playerInput.fire && !GameMgr.Instance.isPause)
         {
             gun.Fire();
         }
