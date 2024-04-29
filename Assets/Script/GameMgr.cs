@@ -14,6 +14,7 @@ public class GameMgr : MonoBehaviour
     public GameObject pauseMenu;
     public Button quitGameButton;
     public Button resumeButton;
+    public GameObject gameOverImage;
 
     public bool isPause;
 
@@ -33,6 +34,7 @@ public class GameMgr : MonoBehaviour
         pauseMenu.SetActive(false);
         quitGameButton.enabled = false;
         resumeButton.enabled = false;
+        gameOverImage.SetActive(false);
     }
 
     private void Start()
@@ -70,9 +72,19 @@ public class GameMgr : MonoBehaviour
     {
         Debug.Log("Game Over");
         isGameOver = true;
+        gameOverImage.SetActive(true);
+
+        //float R =  gameOverImage.GetComponent<Image>().color.r;
+        //float G =  gameOverImage.GetComponent<Image>().color.g;
+        //float B =  gameOverImage.GetComponent<Image>().color.b;
+        //float A =  gameOverImage.GetComponent<Image>().color.a;
+        //Color startColor = gameOverImage.GetComponent<Image>().color;
+        //A = 255f;
+        //Color endColor = new Color(R, G, B, A);
+        //Color.Lerp(startColor, endColor, 1f);
+       
         StopAllCoroutines();
         StartCoroutine(GameRestart());
-
     }
 
     public IEnumerator GameRestart()
@@ -83,6 +95,7 @@ public class GameMgr : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         objectPool.ResetQueue();
         isGameOver = false;
+        gameOverImage.SetActive(false);
         bgmAudio.Play();
 
     }

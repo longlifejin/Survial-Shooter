@@ -71,8 +71,6 @@ public class PlayerHealth : LivingGO
 
     }
 
-
-
     public void RestartLevel()
     {
         if(onRespawn != null)
